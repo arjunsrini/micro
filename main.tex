@@ -1,0 +1,169 @@
+%% LyX 2.3.7 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[11pt,notitlepage]{article}
+\usepackage{mathptmx}
+\usepackage[latin9]{inputenc}
+\usepackage{geometry}
+\geometry{verbose,tmargin=1.25in,bmargin=1.25in,lmargin=1in,rmargin=1in}
+\usepackage{xcolor}
+\usepackage{verbatim}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage[authoryear]{natbib}
+\PassOptionsToPackage{normalem}{ulem}
+\usepackage{ulem}
+\onehalfspacing
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 0},pdfborderstyle={},backref=false,colorlinks=true]
+ {hyperref}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{multicol}
+\usepackage{pdflscape}
+\usepackage{dcolumn}
+
+\setcounter{MaxMatrixCols}{10}
+
+\usepackage{fancyhdr}
+
+\usepackage[dvipsnames]{xcolor}
+
+
+% https://tex.stackexchange.com/questions/36278/box-around-theorem-statement
+% https://tex.stackexchange.com/questions/581961/main-text-of-tcbtheorem-environment-absorbed-into-options
+% https://xyquadrat.ch/blog/latex-boxes/
+\usepackage[most]{tcolorbox}
+\tcbset {
+  base/.style={
+    arc=0mm, 
+    bottomtitle=0.5mm,
+    boxrule=0mm,
+    colbacktitle=black!10!white, 
+    coltitle=black, 
+    fonttitle=\bfseries, 
+    left=2.5mm,
+    leftrule=1mm,
+    right=3.5mm,
+    title={#1},
+    toptitle=0.75mm, 
+  }
+}
+
+\newtcolorbox{mainbox}[1]{
+  colframe=DarkOrchid, 
+  base={#1}
+}
+\newtcolorbox{subbox}[1]{
+  colframe=black!30!white,
+  base={#1}
+}
+
+
+%  https://www.overleaf.com/learn/latex/Paragraphs_and_new_lines
+\setlength{\parindent}{0pt}
+
+% https://stackoverflow.com/questions/4968557/latex-very-compact-itemize
+\usepackage{enumitem}
+\setitemize{noitemsep,topsep=0pt,parsep=0pt,partopsep=0pt}
+\setenumerate{noitemsep,topsep=0pt,parsep=0pt,partopsep=0pt}
+
+% This gives Roman section numbers
+%\renewcommand{\thesection}{\Roman{section}} 
+%\renewcommand{\thesubsection}{\thesection.\Alph{subsection}}
+
+% This gives assumption numbers
+\usepackage{amsmath}  
+\newtheorem{assumption}{Assumption}
+\newtheorem{lemma}{Lemma}
+
+% This numbers equations by section
+\numberwithin{equation}{section}
+
+% Set link display style
+\hypersetup{
+    colorlinks=true,
+    linkcolor={rgb:red,4;green,119;blue,204}, % Light Blue
+    filecolor={rgb:red,4;green,119;blue,204}, % Light Blue
+    urlcolor={rgb:red,4;green,119;blue,204}, % Light Blue
+}
+
+\@ifundefined{showcaptionsetup}{}{%
+ \PassOptionsToPackage{caption=false}{subfig}}
+\usepackage{subfig}
+\makeatother
+
+\begin{document}
+\title{Microeconomic Analysis Lecture Notes}
+\author{Arjun Srinivasan\textbf{\normalsize{}\medskip{}
+}}
+\maketitle
+
+% \section{Overview\label{sec:Overview}}
+
+These are my lecture notes for the Columbia economics PhD 1st-year microeconomics class (GR6211), taught by Mark Dean.
+
+\newpage{}
+
+\tableofcontents{}
+
+\clearpage{}
+
+\newpage{}
+
+\section{Choice, Preference, and Utility\label{sec:UtilityMax}}
+
+\subsection{Introduction to representation theorems}
+
+When dealing with models (e.g. utility maximization) that have latent (unobservable) variables, we want to find a \textbf{representation theorem}.
+
+\begin{mainbox}{Definition: Representation theorem}
+A representation theorem consists of three things:
+\begin{enumerate}
+    \item A data set
+    \item A model
+    \item A set of conditions on the data which are \textbf{necessary} and \textbf{sufficient} for it to be consistent with the model.
+\end{enumerate}
+\end{mainbox}
+
+A representation theorem tells us the observable implications of a model with unobservables. Often, a representation theorem will have an associated \textbf{uniqueness result}, which tells us how precisely we have pinned down the unobservable variables.
+
+\subsubsection{Data}
+
+Let $X$ be a finite set of objects a person can choose from. Let $2^X$ denote the power set of $X$. 
+
+\begin{mainbox}{Definition: Choice correspondence}
+A choice correspondence tells us what a person chose from each subset of $X$. Formally, a choice correspondence $C$ is a mapping $C : 2^X \setminus \emptyset \to 2^X \setminus \emptyset$ such that $C(A) \subset A$ for all $A \in 2^X \setminus \emptyset$.
+\end{mainbox}
+
+An implicit assumption here is that the choice \emph{only depends on the elements in A}.
+
+There are three issues with this data:
+\begin{enumerate}
+    \item $X$ is finite
+    \item Must observe choices from \emph{all} choice sets
+    \item We allow choice of more than 1 option
+\end{enumerate}
+
+\section{Demand Functions\label{sec:Demand}}
+
+\section{Producer Theory\label{sec:Producer}}
+
+\section{Decision Making Under Risk\label{sec:Risk}}
+
+\section{Decision Making Over Time\label{sec:Time}}
+ 
+\end{document}
