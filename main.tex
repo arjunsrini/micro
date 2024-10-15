@@ -10,6 +10,7 @@
 \usepackage{float}
 \usepackage{mathtools}
 \usepackage{amsmath}
+\usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{setspace}
@@ -21,6 +22,7 @@
  bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
  breaklinks=false,pdfborder={0 0 0},pdfborderstyle={},backref=false,colorlinks=true]
  {hyperref}
+\usepackage{bbding}
 
 \makeatletter
 
@@ -72,6 +74,15 @@
   base={#1}
 }
 
+\newtcolorbox{thmbox}[1]{
+  colframe=CornflowerBlue, 
+  base={#1}
+}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand{\defeq}{\vcentcolon=}
+
 
 %  https://www.overleaf.com/learn/latex/Paragraphs_and_new_lines
 \setlength{\parindent}{0pt}
@@ -86,7 +97,8 @@
 %\renewcommand{\thesubsection}{\thesection.\Alph{subsection}}
 
 % This gives assumption numbers
-\usepackage{amsmath}  
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
 \newtheorem{assumption}{Assumption}
 \newtheorem{lemma}{Lemma}
 
@@ -126,7 +138,7 @@ Notes for the Columbia economics Ph.D. 1st-year microeconomics class (GR6211) ta
 
 \section{Choice, Preference, and Utility\label{sec:UtilityMax}}
 
-\subsection{Introduction to representation theorems}
+\subsection{Introduction to Representation Theorems}
 
 When dealing with models (e.g. utility maximization) that have latent (unobservable) variables, we want to find a \textbf{representation theorem}.
 
@@ -146,7 +158,7 @@ A representation theorem tells us the observable implications of a model with un
 Let $X$ be a finite set of objects a person can choose from. Let $2^X$ denote the power set of $X$. 
 
 \begin{mainbox}{Definition: Choice correspondence}
-A choice correspondence tells us what a person chose from each subset of $X$. Formally, a choice correspondence $C$ is a mapping $C : 2^X \setminus \emptyset \to 2^X \setminus \emptyset$ such that $C(A) \subset A$ for all $A \in 2^X \setminus \emptyset$.
+ A choice correspondence tells us what a person chose from each subset of $X$. Formally, a choice correspondence $C$ is a mapping $C : 2^X \setminus \emptyset \to 2^X \setminus \emptyset$ such that $C(A) \subset A$ for all $A \in 2^X \setminus \emptyset$.
 \end{mainbox}
 
 An implicit assumption here is that the choice \emph{only depends on the elements in A}.
@@ -158,7 +170,155 @@ There are three issues with this data:
     \item We allow the choice of more than 1 option
 \end{enumerate}
 
-\section{Demand Functions\label{sec:Demand}}
+\subsubsection{$\alpha$, $\beta$, and Weak Axiom of Revealed Preference (WARP)}
+
+\begin{mainbox}{Axiom $\alpha$: Independence of Irrelevant Alternatives}
+If $x \in B \subseteq A$ and $x \in C(A)$, then $x \in C(B)$.
+\end{mainbox}
+
+\begin{mainbox}{Axiom $\beta$}
+If $x,y \in C(A)$, $A \subseteq B$, and $y \in C(B)$, then $x \in C(B)$.
+\end{mainbox}
+
+\begin{mainbox}{Weak Axiom of Revealed Preference (WAPR)}
+If $x,y \in A \cap B$, $x \in C(A)$, and $y \in C(B)$, then $x \in C(B)$.
+\end{mainbox}
+
+A dataset satisfies $\alpha$ and $\beta$ if and only if it satisfies WARP (they are equivalent).
+
+\subsubsection{Representation Theorem}
+
+\begin{thmbox}{Representation Theorem}
+A choice correspondence on a finite $X$ has a utilty representation if and only if it satisfies axioms $\alpha$ and $\beta$.    
+\end{thmbox}
+
+\subsection{Preference Relations}
+
+A relation $R$ on $X$ is defined as a subset of $X \times X$ where $xRy \iff (x,y) \in R \subset X \times X$.
+
+\subsubsection{Properties of Relations}
+
+For a relation $\succeq$ defined on $X$:
+
+\begin{itemize}
+    \item Completeness: $\forall \ x, y \in X$, either $x \succeq y$ or $y \succeq x$ (or both).
+    \item Transitivity: if $x \succeq y$ and $y \succeq z$, then $x \succeq z$.
+    \item Reflexivity: $\forall \ x \in X: x \succeq x$.
+    \item Anti-symmetry: if $x \succeq y$ and $y \succeq x$, then $x = y$.
+    \item Asymmetry: if $x \succeq y$, then $y \nsucceq x$.
+    \item Symmetry: if $x \succeq y$, then $y \succeq x$.
+\end{itemize}
+
+\subsubsection{Types of Relations}
+
+\begin{center}
+\vspace{1em}
+\normalsize
+\begin{tabular}{l c c c c}
+\textbf{Relation Type} & \textbf{Transitive} & \textbf{Reflexive} & \textbf{Anti-symmetric} & \textbf{Complete} \\ 
+Preorder & {\checkmark} & {\checkmark} & &  \\
+Partial Order  & {\checkmark} & {\checkmark} & {\checkmark} & \\
+Linear Order & {\checkmark} & {\checkmark} & {\checkmark} &{\checkmark} \\
+Preference Relation & {\checkmark} & {\checkmark} & & {\checkmark} \\
+\end{tabular}
+\end{center}
+
+
+\begin{mainbox}{Definition: Preordered Set, Poset, Loset}
+For non-empty $X$ and binary relation $R$ on $X$, $(X,R)$ is a preordered set if $R$ is a preorder, a poset if $R$ is a partial order, and loset if $R$ is a linear order.
+\end{mainbox}
+
+\subsubsection{Note on Relation Notation}
+
+We often write $\succeq$ for a preference relation, and write the strict preference $x \succ y$ when $x \succeq y$ but not $y \succeq x$. $\succ$ is the asymmetric part $\succeq$. We also write $x \sim y$ when $x \succeq y$ and $y \succeq x$. $\sim$ is the symmetric part of $\succeq$.
+
+\subsubsection{Order Separability, Lexicographic Preferences}
+
+A preference relation $X$ has a utility representation if and only if it is order separable.
+
+\begin{mainbox}{Definition: Order Separability}
+A preference relation $\succeq$ on $X$ is order separable if there exists a countable sequence $e \in X^{\mathbb{N}}$ such that for every $x,y \in X$ such that $x \succ y$ there exists $e_i, e_j \in e$ such that 
+$$x \succeq e_i \succ e_j \succeq y$$
+\end{mainbox}
+
+\textbf{Example: Lexicographic preferences} \\
+
+Let $\succeq$ be a binary relation on $\mathbb{R} \times {1,2}$ such that $\{a,b\} \succeq \{c,d\} \iff (a > c) \lor ( (a = c) \land (b \geq d))$. $\succeq$ is complete, but no utility function rationalizes $\succeq$. 
+
+\begin{proof}~
+Tk.
+\end{proof}
+
+\subsubsection{Convexity}
+
+\begin{mainbox}{Definition: Convexity}
+$\succeq$ is convex if $x \succeq z$ and $y \succeq z$ implies $\forall \ \alpha \in [0,1]$ we have $\alpha x + (1 - \alpha)y \succeq z$. $\succeq$ is strictly convex if under the same conditions, $\alpha x + (1 - \alpha)y \succ z$.
+\end{mainbox}
+
+\subsubsection{Continuity}
+
+\begin{mainbox}{Definition: Continuity (3 equivalent definitions)}
+\begin{enumerate}
+    \item A preference relation $\succeq$ on a metric space $X$ is continuous if for any $x, y \in X$ such that $x \succ y$ there exists an $\epsilon > 0$ such that for any $x' \in B(x, \epsilon)$ and $y' \in B(y,\epsilon)$, $x' \succ y'$.
+    \item A preference relation $\succeq$ on a metric space $X$ is continuous if and only if for every $x, y \in X$ and sequence $\{ x_n, y_n\}$ such that $x_n \to x$ and $y_n \to y$, then $x_n \succeq y_n \ \forall \ n$ implies $x \succeq y$.
+    \item A preference relation $\succeq$ on a metrix space $X$ is continuous if and only if, for any $x$ the sets $\{y | y \succ x\}$ and $\{y|x \succ y\}$ are open (or $\{y | y \succeq x\}$ and $\{y | x \succeq y\}$ are closed).
+\end{enumerate}
+\end{mainbox}
+
+If a preference relation $\succeq$ can be represented by a continuous utility function then it is continuous.
+
+\subsubsection{Debreu's Theorem}
+
+Let $X$ be a separable metric space. $\succeq$ is a continuous preference relation on $X$ if and only if it can be represented by a continuous utility function. \\ 
+
+Let $X$ be a convex subset of $\mathbb{R}^n$ and $\succeq$ be a complete preference relation on $X$. If $\succeq$ is continuous, then it can be represented by a utility function.
+
+\subsubsection{Rationalizing Choice}
+
+$\succeq$ rationalizes a choice correspondence $C(\cdot)$ if $C(A)= \{x \in A| x \succeq y \ \forall \ y \in A\}$. \\
+
+$U(\cdot)$ rationalizes a choice correspondence $C(\cdot)$ if $C(A) = \underset{x \in A}{\argmax} \ U(x)$.
+
+
+\subsubsection{Transitive Closures, Szpilrajn's Theorem}
+
+\begin{mainbox}{Definition: Transitive Closure}
+A transitive closure of a binary relation $R$ is a binary relation $T(R)$ that is the smallest transitive binary relation that contains $R$ (i.e. $xRy \implies xT(R)y$).
+\end{mainbox}
+
+\begin{mainbox}{Definition: Extension}
+Let $\succeq$ be a preorder on $X$. An extension of $\succeq$ is a preorder $\trianglerighteq$ such that $\succeq \implies \trianglerighteq$ and $\succ \implies \triangleright$.
+\end{mainbox}
+
+\begin{thmbox}{Szpilrajn's Extension Theorem}
+For any nonempty set $X$ and preorder $\succeq$ on X there exists a complete preorder that is an extension of $\succeq$.
+\end{thmbox}
+
+
+\subsubsection{Generalized Axiom of Revealed Preference (GARP)}
+
+\begin{mainbox}{Revealed preference}
+
+$x$ is directly revealed preferred $(R^D)$ to $y$ if for some choice set $A$, $y \in A$ and $x \in C(A)$. $x$ is revealed preferred $(R)$ to $y$ if we can find a set of alternatives $w_1, ..., w_n$ such that $x_1 R^D w_1 R^D ... R^D w_n R^D y$. $R$ is the transitive closure of $R^D$. \\ 
+
+x is \textbf{strictly} revealed preferred ($S$) to y if for some choice set $A$, $y \in A$, $x \in C(A)$ and $y \notin C(A)$.
+
+
+\end{mainbox}
+
+\begin{mainbox}{Generalized Axiom of Revealed Preference (GARP)}
+A choice correspondence $C$ satisfies the General Axiom of Revealed Preference (GARP) if it is never the case that $x$ is revealed preferred to y, and y is strictly revealed preferred to x.
+\end{mainbox}
+
+
+\begin{thmbox}{Theorem: GARP $\iff$ preference representation}
+A choice correspondence $C$ on an arbitrary subset of $2^X \setminus \emptyset$ satisfies GARP if and only if it has a preference representation.
+\end{thmbox}
+
+\subsection{Random Choice}
+
+
+\section{Consumer Theory\label{sec:Consumer}}
 
 \section{Producer Theory\label{sec:Producer}}
 
